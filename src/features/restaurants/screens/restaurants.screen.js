@@ -6,9 +6,8 @@ import { Searchbar } from "react-native-paper";
 import React from "react";
 import { RestaurantInfo } from "../components/ restaurant-info.component";
 
-
 export const RestaurantsScreen = () => (
-    <SafeAreaView style={styles.statusbarfix}>
+  <SafeAreaView style={styles.statusbarfix}>
     {/* Safeareaview is used to make sure UI is according to iOS and do not overlap with the statusbar in iOS we are using */}
     <View style={styles.search}>
       <Searchbar />
@@ -20,22 +19,20 @@ export const RestaurantsScreen = () => (
       {/* The above component is imported from restaurant-info.component.js file and will display us the list of restaurants in our app with their names. */}
     </View>
   </SafeAreaView>
-)
-
+);
 
 const styles = StyleSheet.create({
-    statusbarfix: {
-      flex: 1,
-      marginTop: StatusBar.currentHeight,
-      //  flex:1 in the above is to make sure you always fill the parent
-      // In the above code StatusBar.currentHeight is a android only function which takes care of the height of the status bar across all android devices.
-    },
-  
-    search: {
-      padding: 16,
-      backgroundColor: "white",
-    },
-  
-    list: { flex: 1, padding: 16, backgroundColor: "blue" },
-  });
-  
+  statusbarfix: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight,
+    //  flex:1 in the above is to make sure you always fill the parent
+    // In the above code StatusBar.currentHeight is a android only function which takes care of the height of the status bar across all android devices.
+  },
+
+  search: {
+    padding: 16,
+    backgroundColor: "white",
+  },
+
+  list: { flex: 1, padding: 16, backgroundColor: "blue" },
+});
