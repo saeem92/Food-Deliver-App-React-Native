@@ -4,7 +4,7 @@
 import { StatusBar, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { Searchbar } from "react-native-paper";
 import React from "react";
-import { RestaurantInfo } from "../components/ restaurant-info.component";
+import { RestaurantInfo } from "../components/ restaurant-info-card.component";
 
 export const RestaurantsScreen = () => (
   <SafeAreaView style={styles.statusbarfix}>
@@ -34,5 +34,5 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
 
-  list: { flex: 1, padding: 16, backgroundColor: "blue" },
+  list: { flex: 1, padding: 16, backgroundColor: "white" },
 });
