@@ -16,7 +16,8 @@ export const RestaurantsScreen = () => (
     <View style={styles.list}>
       {/* IN the above code we have given flex:1 in this view so that it will fill the screen completely and fill stick to the constraints of the screen.*/}
       <RestaurantInfo />
-      {/* The above component is imported from restaurant-info.component.js file and will display us the list of restaurants in our app with their names. */}
+      {/* The above component is imported from restaurant-info-card.component.js file and will display us the list of restaurants in our app with their names. 
+      The RestaurantInfo is displaying our card component here.*/}
     </View>
   </SafeAreaView>
 );

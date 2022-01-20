@@ -46,3 +46,4 @@ const styles = StyleSheet.create({
   title: { padding: 16 },
   // We can increase the size of the restaurant name by using Fontsize:
 });
+// Add a comment here if needed.
