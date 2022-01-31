@@ -9,7 +9,9 @@ import { RestaurantInfo } from "../components/ restaurant-info-card.component";
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
-  margin-top: ${StatusBar.currentHeight}px;
+  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
+  {/* This above margin-top: ${StatusBar.currentHeight}px; is causing an error is iOS so we will fix it */
+  /* Here we are using a variable which is statusbar.currentheight & if it has a value then add margin-top statusbar.current height this means we are only applying a margin top if statusbar.current height exist or has a value*/}
 `;
 // IN the above SafeArea we have created a const component SafeArea to style our SafeArea we are doing by using styled-components that we have imported and installed.
 
