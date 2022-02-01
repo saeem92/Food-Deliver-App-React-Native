@@ -18,16 +18,18 @@ background-color: white;
 
 
 const RestaurantCardCover = styled(Card.Cover)`
-padding: 20px;
-background-color: white;
+padding: ${(props) => props.theme.space[3]};
+{/* In the above and below code we are using props from infrastructure folder and we are doing theming here. */}
+background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
 // RestaurantCardCover is a styled-component we created above to style our cardcover component.
 
 const Title = styled.Text`
 padding: 16px;
-color: red;
+color: ${(props) => props.theme.colors.ui.primary};
 `;
+// ${props => props.theme.color.ui.primary we have created it using theming that we have created inside infrastructure through theming.}
 // In the above code const Title we have created a styled componenet to style our title component
 // We were able to create this component using styled-components and it has a special type of string (``)
 

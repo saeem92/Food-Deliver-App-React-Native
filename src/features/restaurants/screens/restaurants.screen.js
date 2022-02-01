@@ -19,15 +19,17 @@ const SafeArea = styled(SafeAreaView)`
 // NOTE: We do not have to stylesheet when we style our components using styled-components.
 
 const SearchContainer = styled.View`
-  padding: 16px;
+  padding: ${(props) => props.theme.space[3]};
+{/* In the above code we are using props to set padding from infrastructure folder and we are doing theming here. */}
 `;
 // IN the above SerachContainer we have created a const component SearchContainer which is a view that holds our searchbar and we have give it some padding to give it some space.
 // NOTE: We do not have to stylesheet when we style our components using styled-components.
 
 const RestaurantListContainer = styled.View`
   flex: 1;
-  padding: 16px;
-  background-color: white;
+  padding: ${(props) => props.theme.space[3]};
+  {/* In the above code we are using props to set padding from infrastructure folder and we are doing theming here. */}
+  
 `;
 // IN the above code we have given flex:1 in this view so that it will fill the screen completely and fill stick to the constraints of the screen.
 // IN the above RestaurantListContainer we have created a const component RestaurantListContainer to style our SafeArea we are doing by using styled-components that we have imported and installed.
