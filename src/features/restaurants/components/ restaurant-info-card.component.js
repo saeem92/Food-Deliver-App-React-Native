@@ -26,6 +26,8 @@ background-color: ${(props) => props.theme.colors.bg.primary};
 // RestaurantCardCover is a styled-component we created above to style our cardcover component.
 
 const Title = styled.Text`
+font-family: ${(props) => props.theme.fonts.body}; 
+{/* The above code is helpinh us changing the font of the text which is the name of the restaurant*/}
 padding: 16px;
 color: ${(props) => props.theme.colors.ui.primary};
 `;

@@ -7,8 +7,23 @@ import React from "react";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme/";
 
+import {useFonts as useOswald, Oswald_400Regular,} from '@expo-google-fonts/oswald';
+// The above and below code is importing google fonts that we are using in our app.
+import { useFonts as useLato, Lato_400Regular,} from '@expo-google-fonts/lato';
 
 export default function App() {
+  const [oswaldLoaded] = useOswald({
+    Oswald_400Regular,
+  }); 
+  // We have created const component here to use oswald font from google font family which we have imported above
+
+  const [latoLoaded] = useLato({
+    Lato_400Regular,
+  });
+// We have created a const component here to use lato font from google font family which we have imported above
+  if(!oswaldLoaded || !latoLoaded){
+    return null; // if font is not loading by anychance default font will be applied in the app.
+  }
   return (
     <>
     {/* The above <> is called as a fragment they allow us to render two elements side by side without having to wrap it in a specific container or view */}
@@ -22,4 +37,3 @@ export default function App() {
     </>
   );
 }
-
