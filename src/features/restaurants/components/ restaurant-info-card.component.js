@@ -1,5 +1,4 @@
 // This component is responsible for showing all restaurant names and details and is exported in restaurant.screen.js
-// Comment for further details
 // Comment to add more details about this component.
 // In the below code we have created a RestaurantInfo component which is taking a specific restaurant as an object, Then we have created a const which has all the properties that our restaurant going to have it consist name,icon,photos,address,open,rating,close then we have set this const = restaurant
 
@@ -10,11 +9,15 @@ import { Text, StyleSheet } from "react-native";
 import { Card, TextInput } from "react-native-paper";
 
 
-
 const RestaurantCard = styled(Card)`
 background-color: white;
 `;
 // RestaurantCard is a styled-component we created above to style our card component.
+
+const Info = styled.View`
+padding: ${(props) => props.theme.space[3]};
+;`
+// Const info is used here to add spacing between restaurant name and the card component or image.
 
 
 const RestaurantCardCover = styled(Card.Cover)`
@@ -22,13 +25,18 @@ padding: ${(props) => props.theme.space[3]};
 {/* In the above and below code we are using props from infrastructure folder and we are doing theming here. */}
 background-color: ${(props) => props.theme.colors.bg.primary};
 `;
-
 // RestaurantCardCover is a styled-component we created above to style our cardcover component.
 
-const Title = styled.Text`
-font-family: ${(props) => props.theme.fonts.body}; 
-{/* The above code is helpinh us changing the font of the text which is the name of the restaurant*/}
-padding: 16px;
+const Address = styled(Text)`
+font-family: ${(props) => props.theme.fonts.body};
+font-size: ${(props) => props.theme.fontSizes.caption}; 
+`;
+// The above component is a styled-component used to style address of the restaurant.
+
+const Title = styled(Text)`
+font-family: ${(props) => props.theme.fonts.heading}; 
+{/* The above code is helping us changing the font of the text which is the name of the restaurant*/}
+font-size: ${(props) => props.theme.fontSizes.body};
 color: ${(props) => props.theme.colors.ui.primary};
 `;
 // ${props => props.theme.color.ui.primary we have created it using theming that we have created inside infrastructure through theming.}
@@ -62,13 +70,19 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
             we can add image in this cover to display it we have give it a source which will display our image in the card component and we gave it a styles.cover 
             styles.cover has padding of 20 we can give more padding depending on how much space you need.
             we have give photos [0] as this is above we have added an image in an array an the url is the 0th element of that array. */}
+      <Info>
       <Title>{name}</Title>
       {/* In the above code we have used title as we have created it's component above as a styled-component and using it to style the name of the restaurant like its color size etc.*/}
       {/* In the above code name is the prop we have picked from const created above we have added styling to give more space to the restaurant image and pushed away our restaurant name 
             little further than the image and making it look more good you can adjust it accordingly. */}
+    <Address>{address}</Address>
+    </Info>
     </RestaurantCard>
   );
 };
+
+
+
 
 // Commented stylesheet as we are using styled-components.
 

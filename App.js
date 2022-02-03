@@ -12,16 +12,20 @@ import {useFonts as useOswald, Oswald_400Regular,} from '@expo-google-fonts/oswa
 import { useFonts as useLato, Lato_400Regular,} from '@expo-google-fonts/lato';
 
 export default function App() {
+  
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   }); 
-  // We have created const component here to use oswald font from google font family which we have imported above
+  // We have created const component here to use oswald font from google font family which we have imported above.
+  // These components will be used as props later in restaurantinfocard component inside const Title = styled.Text` with the help of fonts.js file.
 
   const [latoLoaded] = useLato({
     Lato_400Regular,
   });
 // We have created a const component here to use lato font from google font family which we have imported above
-  if(!oswaldLoaded || !latoLoaded){
+// These components will be used as props later in restaurantinfocard component inside const Title = styled.Text` with the help of fonts.js file.  
+
+if(!oswaldLoaded || !latoLoaded){
     return null; // if font is not loading by anychance default font will be applied in the app.
   }
   return (
