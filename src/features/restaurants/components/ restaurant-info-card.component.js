@@ -7,6 +7,9 @@ import styled from "styled-components/native"
 // Here we are importing styled-components that we installed from terminal.
 import { Text, StyleSheet } from "react-native";
 import { Card, TextInput } from "react-native-paper";
+import { SvgXml } from 'react-native-svg';
+// In the above code we are importing svgXml to use svg in our app.
+import star from "../../../../assets/star";
 
 
 const RestaurantCard = styled(Card)`
@@ -19,6 +22,14 @@ padding: ${(props) => props.theme.space[3]};
 ;`
 // Const info is used here to add spacing between restaurant name and the card component or image.
 
+const Rating = styled.View`
+flex-direction: row;
+padding-top: ${(props) => props.theme.space[2]};
+padding-bottom: ${(props) => props.theme.space[2]};
+;`
+// Our stars were aligning underneath each other because flex is default to column so,
+// We have created a styled-component above and changed flex to row from column.
+// Here padding is adding decent amount of space between the rating and the address and the name of the restaurant..
 
 const RestaurantCardCover = styled(Card.Cover)`
 padding: ${(props) => props.theme.space[3]};
@@ -59,6 +70,12 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     // We are trying to determine the shape of the object we are trying to get
   } = restaurant; // This is de structuring Here our restaurant is an object that contains properties that we are taking properties off of restaurant restaurant is the object that contains properties. this is the object that we have mentioned above in export const restaurantInfo
 
+
+const ratingArray = Array.from(new Array(Math.floor(rating))); 
+// This component is pulling out rating from our const above and is helping us display stars as per restaurant rating.
+// Math.floor is helping us to make sure when we have fraction we will deal that fraction in a whole number we will round of that fraction for example if its 3.2 we will call it 3.
+
+
   return (
     <RestaurantCard elevation={5}>
     {/* RestaurantCard is a styled-component we created above to style our card component.*/}
@@ -75,6 +92,16 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
       {/* In the above code we have used title as we have created it's component above as a styled-component and using it to style the name of the restaurant like its color size etc.*/}
       {/* In the above code name is the prop we have picked from const created above we have added styling to give more space to the restaurant image and pushed away our restaurant name 
             little further than the image and making it look more good you can adjust it accordingly. */}
+    <Rating>
+    {ratingArray.map(() => (
+    <SvgXml xml={star} width={20} height={20}/>
+    ))}
+    {/* In the above code SvgXml is helping us to use star.js which is a svg file to use it in our app.
+    xmo={star} we are using it from star.js file which we have imported above in this file
+    We have set the width to 20 and height to 20 to get it fit inside our restaurant card component.
+    This is helping us in rating the restaurant by displaying stars.*/}
+    </Rating>
+    {/* The Rating styled-component is used as a view component here for our stars we have placed our ratingarray.map inside it so our stars get aligned in a row and not column which is default before this our stars were aligning underneath each other. */}
     <Address>{address}</Address>
     </Info>
     </RestaurantCard>
