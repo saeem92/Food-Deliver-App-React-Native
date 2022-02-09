@@ -11,6 +11,11 @@ import { SvgXml } from "react-native-svg";
 // In the above code we are importing svgXml to use svg in our app.
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
+import { Spacer } from "../../../components/spacer/spacer.component";
+
+
+
+
 
 const RestaurantCard = styled(Card)`
   background-color: white;
@@ -81,6 +86,15 @@ const Title = styled(Text)`
 // In the above code const Title we have created a styled componenet to style our title component
 // We were able to create this component using styled-components and it has a special type of string (``)
 
+
+
+
+
+
+
+
+
+
 export const RestaurantInfo = ({ restaurant = {} }) => {
   // Here our RestaurantInfo will take an object {restaurant}. We have to set restaurant to be an empty object else its going to be UNDEFINED and if its undefined our code will break.
   // Below code is building some mock information for us to set the scene and start building out our card component.
@@ -139,13 +153,14 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
               </Text>
             )} 
             {/* This is a conditonal if you restaurant is closed its going to show closedrestaurant text */}
-            <View style={{paddingLeft: 16}}/>
-          {/* View style is giving padding between CLOSED TEMPORARILY text and icon. */}
+            <Spacer variant= "left.large"/>
+          {/* Spacer variant= "left.large" is giving padding between CLOSED TEMPORARILY text and icon. */}
 
             {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
             {/* This is a conditonal if you are open now its going to show you an opennow svg */}
-            <View style={{paddingLeft: 16}}/>
-            {/* View style is giving padding between opennow svg and icon. */}
+            <Spacer variant= "left.large"/>
+            {/* Spacer variant= "left.large" is giving padding between opennow svg and icon. we have created this inside
+            spacer component to help us give some margin to our component inside card. */}
             <Image style={{width:15, height:15}} source={{uri: icon}} />
           {/* Here our image style is taking image from our icon and display when closed temporarily condition is true.
           icon image is fetched from the url we have assigned in the icon.*/}
@@ -156,6 +171,16 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     </RestaurantCard>
   );
 };
+
+
+
+
+
+
+
+
+
+
 
 // Commented stylesheet as we are using styled-components.
 
