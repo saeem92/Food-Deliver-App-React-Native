@@ -3,97 +3,27 @@
 // In the below code we have created a RestaurantInfo component which is taking a specific restaurant as an object, Then we have created a const which has all the properties that our restaurant going to have it consist name,icon,photos,address,open,rating,close then we have set this const = restaurant
 
 import React from "react";
-import styled from "styled-components/native";
 // Here we are importing styled-components that we installed from terminal.
-import { Text, Image, View } from "react-native";
-import { Card, TextInput } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 // In the above code we are importing svgXml to use svg in our app.
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 import { Spacer } from "../../../components/spacer/spacer.component";
+import { Text } from "../../../components/typography/text.component";
+// The above import is from text.component.js file where we have created our typography component.
 
-
-
-
-
-const RestaurantCard = styled(Card)`
-  background-color: white;
-`;
-// RestaurantCard is a styled-component we created above to style our card component.
-
-const Info = styled.View`
-  padding: ${(props) => props.theme.space[3]}; ;
-`;
-// Const info is used here to add spacing between restaurant name and the card component or image.
-
-const Rating = styled.View`
-  flex-direction: row;
-  padding-top: ${(props) => props.theme.space[2]};
-  padding-bottom: ${(props) => props.theme.space[2]}; ;
-`;
-// Our stars were aligning underneath each other because flex is default to column so,
-// We have created a styled-component above and changed flex to row from column.
-// Here padding is adding decent amount of space between the rating and the address and the name of the restaurant..
-
-const RestaurantCardCover = styled(Card.Cover)`
-  padding: ${(props) => props.theme.space[3]};
-   {
-    /* In the above and below code we are using props from infrastructure folder and we are doing theming here. */
-  }
-  background-color: ${(props) => props.theme.colors.bg.primary};
-`;
-// RestaurantCardCover is a styled-component we created above to style our cardcover component.
-
-const Address = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.body};
-  font-size: ${(props) => props.theme.fontSizes.caption};
-`;
-// The above component is a styled-component used to style address of the restaurant.
-
-const Section = styled.View`
-  flex-direction: row; {/* Here this flex direction is helping us to arrange our stars and open now in a row style else they will appear at center 
-  and both our stars and opennow svg will lie beneath each other in column style.*/}
-  align-items: center;
-`; 
-// The above is a Section styled-component this is helping us to center our opennow svg.
-// Here row means that its going to put content inside in a row style syntax
-// And align-items to the center of the card cover which has name rating and address of the restaurant,.
-
-
-const SectionEnd = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-// The above is a SectionEnd styled-component this is helping us to center our opennow svg.
-// Here our SectionEnd is doing the same thing its going to put content inside in a row style syntax
-// The end outcome of this is that its going to push our opennow svg to the side
-// Flex:1 is helping us to push our opennow svg to the side.
-
-
-
-
-const Title = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.heading};
-   {
-    /* The above code is helping us changing the font of the text which is the name of the restaurant*/
-  }
-  font-size: ${(props) => props.theme.fontSizes.body};
-  color: ${(props) => props.theme.colors.ui.primary};
-`;
-// ${props => props.theme.color.ui.primary we have created it using theming that we have created inside infrastructure through theming.}
-// In the above code const Title we have created a styled componenet to style our title component
-// We were able to create this component using styled-components and it has a special type of string (``)
-
-
-
-
-
-
-
-
-
+import {
+  RestaurantCard,
+  RestaurantCardCover,
+  Info,
+  Section,
+  SectionEnd,
+  Rating,
+  Icon,
+  Address,
+} from "./restaurant-info-card.styles";
+// The above imports are helping us to style our restaurantcardcomponent and all of the styling is built with styled-components present in restaurant-info-card.styles.js
+// All these imports are styled-components present inside restaurant-info-card.styles.js
 
 export const RestaurantInfo = ({ restaurant = {} }) => {
   // Here our RestaurantInfo will take an object {restaurant}. We have to set restaurant to be an empty object else its going to be UNDEFINED and if its undefined our code will break.
@@ -127,8 +57,8 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
             styles.cover has padding of 20 we can give more padding depending on how much space you need.
             we have give photos [0] as this is above we have added an image in an array an the url is the 0th element of that array. */}
       <Info>
-        <Title>{name}</Title>
-        {/* In the above code we have used title as we have created it's component above as a styled-component and using it to style the name of the restaurant like its color size etc.*/}
+        <Text variant="label">{name}</Text>
+        {/* In the above code we have used text as we have created it's component in text.component.js and we are importing it from there and using it to style the name of the restaurant like its color size etc.*/}
         {/* In the above code name is the prop we have picked from const created above we have added styling to give more space to the restaurant image and pushed away our restaurant name 
             little further than the image and making it look more good you can adjust it accordingly. */}
         <Section>
@@ -148,22 +78,22 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
           <SectionEnd>
             {/* SectionEnd is a special type of component we have created here to move our opennow svg in the corner of the card component*/}
             {isClosedTemporarily && (
-              <Text variant= "label" style={{color: "red"}}>
-              CLOSED TEMPORARILY
-              </Text>
-            )} 
+              <Text variant="error">CLOSED TEMPORARILY</Text>
+            )}
             {/* This is a conditonal if you restaurant is closed its going to show closedrestaurant text */}
-            <Spacer variant= "left.large"/>
-          {/* Spacer variant= "left.large" is giving padding between CLOSED TEMPORARILY text and icon. */}
+            <Spacer position="left" size="large">
+              {/* Spacer position is giving padding between CLOSED TEMPORARILY text and icon. */}
 
-            {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
-            {/* This is a conditonal if you are open now its going to show you an opennow svg */}
-            <Spacer variant= "left.large"/>
-            {/* Spacer variant= "left.large" is giving padding between opennow svg and icon. we have created this inside
+              {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+              {/* This is a conditonal if you are open now its going to show you an opennow svg */}
+            </Spacer>
+            <Spacer position="left" size="large">
+              {/* Spacer position is giving padding between opennow svg and icon. we have created this inside
             spacer component to help us give some margin to our component inside card. */}
-            <Image style={{width:15, height:15}} source={{uri: icon}} />
-          {/* Here our image style is taking image from our icon and display when closed temporarily condition is true.
+              <Icon source={{ uri: icon }} />
+              {/* Here our image style is taking image from our icon and display when closed temporarily condition is true.
           icon image is fetched from the url we have assigned in the icon.*/}
+            </Spacer>
           </SectionEnd>
         </Section>
         <Address>{address}</Address>
@@ -171,16 +101,6 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     </RestaurantCard>
   );
 };
-
-
-
-
-
-
-
-
-
-
 
 // Commented stylesheet as we are using styled-components.
 
