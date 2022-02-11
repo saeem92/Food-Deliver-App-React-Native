@@ -1,11 +1,13 @@
 // We have created this restaurants screen component to show main display screen of our app consists of all the restaurants names and everything
 // This component show us our restaurant app screen UI by importing it from restaurant info component it has all the components thats helping us to build our restaurant screen.
 // This component is responsible for displaying our app on the screen.
-import { StatusBar, StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StatusBar, StyleSheet, Text, View, SafeAreaView, FlatList } from "react-native";
 import { Searchbar } from "react-native-paper";
 import React from "react";
 import styled from "styled-components/native";
 import { RestaurantInfo } from "../components/ restaurant-info-card.component";
+
+
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -43,11 +45,15 @@ export const RestaurantsScreen = () => (
       <Searchbar />
       {/* The search bar is imported from react native paper and is helping us to add a searchbox in our app. */}
     </SearchContainer>
-    <RestaurantListContainer>
-      {/* This RestaurantListContainer is our View component which we have styled using styled-component created with a name RestaurantListContainer */}
+    <FlatList 
+      data= {[]}
+      renderItem={() => <RestaurantInfo /> }
+      keyExtractor={(item) => item.name}
+
+    />
       <RestaurantInfo />
       {/* The above component is imported from restaurant-info-card.component.js file and will display us the list of restaurants in our app with their names. 
       The RestaurantInfo is displaying our card component here.*/}
-    </RestaurantListContainer>
+     
   </SafeArea>
 );
