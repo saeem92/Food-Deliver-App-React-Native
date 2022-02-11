@@ -10,8 +10,12 @@ height: 15px;
 
 export const RestaurantCard = styled(Card)`
   background-color: white;
+ 
+  
 `;
 // RestaurantCard is a styled-component we created above to style our card component.
+//margin-bottom 
+
 
 export const Info = styled.View`
   padding: ${(props) => props.theme.space[3]}; ;

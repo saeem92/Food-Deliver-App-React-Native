@@ -6,7 +6,7 @@ import { Searchbar } from "react-native-paper";
 import React from "react";
 import styled from "styled-components/native";
 import { RestaurantInfo } from "../components/ restaurant-info-card.component";
-
+import { Spacer } from "../../../components/spacer/spacer.component";
 
 
 const SafeArea = styled(SafeAreaView)`
@@ -46,13 +46,37 @@ export const RestaurantsScreen = () => (
       {/* The search bar is imported from react native paper and is helping us to add a searchbox in our app. */}
     </SearchContainer>
     <FlatList 
-      data= {[]}
-      renderItem={() => <RestaurantInfo /> }
+      data= {[
+        {name:1},
+        {name:2},
+        {name:3},
+        {name:4},
+        {name:5},
+        {name:6},
+        {name:7},
+        {name:8},
+        {name:9},
+        {name:10},
+        {name:11},
+        {name:12},
+        {name:13},
+        {name:14},
+        ]}
+      renderItem={() => 
+      <>
+      <Spacer position="bottom" size="large">
+      <RestaurantInfo /> 
+      </Spacer>
+      {/* Spacer is placed here between restaurantinfo so that cards dont stick to each other when moving from top to bottom in flatlist.  */}
+      </>}
       keyExtractor={(item) => item.name}
-
+      contentContainerStyle= {{ padding: 16 }}
     />
-      <RestaurantInfo />
-      {/* The above component is imported from restaurant-info-card.component.js file and will display us the list of restaurants in our app with their names. 
+    {/* Flat is used to create scrolling functionality in our app here data is number of restaurantscreen we want to display and we using name: 1 here because it is the name of our restaurant in restaurantinfocardcomponent we have mentioned it there.
+    renderitem is what this component is going to display or render which is RestaurantInfo here
+    contentContainerStyle is used to add styling in the flatlist
+    When we add data to our FlatList one thing to note is in our app we haven't add any default property or so in our restaurantinfo component so if we want to display restaurantinfo we can add any property like name,icon etc to display our restaurantinfo component.  */}
+      {/* The above component <RestaurantInfo /> is imported from restaurant-info-card.component.js file and will display us the list of restaurants in our app with their names. 
       The RestaurantInfo is displaying our card component here.*/}
      
   </SafeArea>
