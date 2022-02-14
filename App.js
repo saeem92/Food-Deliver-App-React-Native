@@ -9,12 +9,16 @@ import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme/";
 import { Text } from "react-native";
 import {useFonts as useOswald, Oswald_400Regular,} from '@expo-google-fonts/oswald';
+
+
 // The above and below code is importing google fonts that we are using in our app.
+
+
 import { useFonts as useLato, Lato_400Regular,} from '@expo-google-fonts/lato';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeArea } from "./src/components/safe-area.component";
 import { Ionicons } from "@expo/vector-icons";
-
+// Ionicons are pre available icons that are came with expoinit that we can use are in our app we are using it to add icons in our bottom navigation of the app.
 
 
 const Tab = createBottomTabNavigator();
