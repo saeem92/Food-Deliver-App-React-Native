@@ -8,18 +8,16 @@ import React from "react";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme/";
 import { Text } from "react-native";
+
 import {useFonts as useOswald, Oswald_400Regular,} from '@expo-google-fonts/oswald';
-
-
 // The above and below code is importing google fonts that we are using in our app.
-
-
 import { useFonts as useLato, Lato_400Regular,} from '@expo-google-fonts/lato';
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeArea } from "./src/components/safe-area.component";
 import { Ionicons } from "@expo/vector-icons";
 // Ionicons are pre available icons that are came with expoinit that we can use are in our app we are using it to add icons in our bottom navigation of the app.
-
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 
 const Tab = createBottomTabNavigator();
 // tab component is used to create the bottom navigation of the app.
@@ -81,6 +79,8 @@ if(!oswaldLoaded || !latoLoaded){
     <ThemeProvider theme={theme}> 
     {/* Here we are wrapping our Restaurant Screen with a theme provider
     theme={theme} is basically helping us to utilise theme in our app.*/}
+    <RestaurantsContextProvider>
+    {/* We are putting the restaurantContextProvider here to give all access of mock data of restaurants here to diplay them.*/}
       <NavigationContainer>
       <Tab.Navigator
             screenOptions={createScreenOptions}
@@ -101,6 +101,7 @@ if(!oswaldLoaded || !latoLoaded){
       Tab navigation is Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header basically it is helping us to create botton navigation).
       Tab.screen is used to actuallu display the things in our app and bottom navigation RestaurantScreen is used to display all of our restaurantsscnreen.
  */}
+ </RestaurantsContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>

@@ -3,11 +3,12 @@
 // This component is responsible for displaying our app on the screen.
 import {  FlatList } from "react-native";
 import { Searchbar } from "react-native-paper";
-import React from "react";
+import React,{ useContext } from "react";
 import styled from "styled-components/native";
 import { RestaurantInfo } from "../components/ restaurant-info-card.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
+import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { SafeArea } from "../../../components/safe-area.component";
 
 // NOTE: We do not have to stylesheet when we style our components using styled-components.
@@ -27,7 +28,12 @@ const RestaurantList = styled(FlatList).attrs({
 
 // NOTE: We do not have to stylesheet when we style our components using styled-components.
 
-export const RestaurantsScreen = () => (
+export const RestaurantsScreen = () => {
+  const restaurantContext = useContext(RestaurantsContext);
+  // In the context we are going to do our service, call and store the restaurants that we get back and have that pass down and eventually we will be able to load up,
+  // All of Sanfrancisco's data and you will see all of these restaurants change
+  console.log(restaurantContext);
+  return(
   <SafeArea>
     {/* Safeareaview is used to make sure UI is according to iOS and do not overlap with the statusbar in iOS we are using */}
     <SearchContainer>
@@ -36,22 +42,8 @@ export const RestaurantsScreen = () => (
       {/* The search bar is imported from react native paper and is helping us to add a searchbox in our app. */}
     </SearchContainer>
     <RestaurantList
-      data= {[
-        {name:1},
-        {name:2},
-        {name:3},
-        {name:4},
-        {name:5},
-        {name:6},
-        {name:7},
-        {name:8},
-        {name:9},
-        {name:10},
-        {name:11},
-        {name:12},
-        {name:13},
-        {name:14},
-        ]}
+      data= {restaurantContext.restaurants}
+      // IN the above data= {restaurantContext.restaurants} is using the array of the restaurant context right here. from restaurants.context.js  */
       renderItem={() => 
       <>
       <Spacer position="bottom" size="large">
@@ -70,4 +62,6 @@ export const RestaurantsScreen = () => (
       The RestaurantInfo is displaying our card component here.*/}
      
   </SafeArea>
-);
+)
+    };
+    

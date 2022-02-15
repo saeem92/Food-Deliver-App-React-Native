@@ -10,3 +10,65 @@
 
 // SINCE WE ARE USING REACT NATIVE WE ARE GOING TO BE USING THE REACT CONTEXT WE ARE GOING TO HAVE A SERVICE FILE THAT'S GOING TO OPERATE AS AN INTERMEDIATE BETWEEN OUR APP AND THE EXTERNAL SERVICE.
 // WE ARE GOING TO MOCK THE EXTERNAL SERVICE WE AREN'T GOING TO MAKE IT AS IF THE EXTERNAL SERVICE IS REAL. AND TO DO THAT WE NEED TO BUILD OUT THIS SERVICE ORIENTED ARCHITECTURE SERVICE LAYER. AND FOR EVERY SUBSEQUEST FEATURE WE WILL BE USING SOMETHING SIMILAR RELATIVELY SIMILAR ALTHOUGH WE MIGHT CHANGED THINGS A BIT BASED ON THE SITUTATION.
+import { mocks } from "./mock";
+import  camelize  from "camelize";
+
+export const restaurantsRequest = (location = "37.7749295,-122.4194155") => {
+      return new Promise((resolve, reject) => {
+          const mock = mocks[location];
+          if(!mock){
+              reject("not found");
+          }
+          resolve(mock);
+      });
+};
+// ((resolve, reject) THIS WILL RETURN A NEW FUNCTION INTERNALLY THAT HAS A RESOLVE AND REJECT FUNCTION
+// The above component will help us to make a request to get restaurants.
+// Here first you have to think what is my restaurant request need in order to get the information for the restaurants.
+// Here we used a location prop and default location is sanfrancisco which we are taking from the mock folder.
+
+
+export const restaurantsTransform = ({results = [] }) => {
+    const mappedResults = results.map((restaurant) => {
+        return {
+           ...restaurant,
+           isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,
+           isClosedTemporarily: restaurant.business_status === "CLOSED_TEMPORARILY",
+        };
+});
+return camelize(mappedResults);
+};
+// results.map((restaurant) it taking the restaurant prop from the restaurantinfocard component to display the restaurants.
+// The above component is helping to camelize result ahead of time.
+// map is a function that will iterate over every individual restaurant and will return us restaurants in the mock data.
+// We have create isOpenNOw and isClosedTemporarily above as they are not mentioned in the mock data or we dont' know how mock data appears so we have created a property to make sure it works. 
+
+
+
+
+
+
+
+
+
+
+//  WE DONT NEED THE BELOW CODE I WILL USE IT SOMEWHERE ELSE.
+// restaurantsRequest()
+// .then(restaurantsTransform)
+// .then(transformedResponse => {
+//     console.log(transformedResponse);
+// })
+// .catch((err) => {
+//     console.log("error")
+// });
+// WE are wrapping our result here (camelize(result)); with camelize to wrap our result to be camelized
+// Anytime you create a promise it is now .then() able basically it means it is waiting for something in the future.
+// This is a way of saying restaurant request is not going to return immediately is going to return sometime in the future.
+// .then is giving us a result in as an inner function by doing the above syntax we will be resolving the inner function and will have the result.
+// We have used .catch((err) above so we could see what would happen if we got error.
+// restaurantsRequest().then((result) this will give us the promised result to get back at a later phase 
+
+// WITH ALL OF THE ABOVE THINGS WE ARE MIMICKING AN API IN A VERY SIMPLE WAY.
+// We are using camelize here because we don't know how you api is returning new data on the backend they may have different principles and they may use underscores or dot something different we dont't really know but WE WANT TO CREATE CONSISTENCY FOR THE APPLICATION.
+// SO IN CASE IF AN API RETURNING IN A DIFFERENT WAY WE WILL STILL HAVE CONSISTENCY THAT'S WHY WE USE CAMELIZE
+// This is an optimization that allows us to create consistency for the information coming in.
