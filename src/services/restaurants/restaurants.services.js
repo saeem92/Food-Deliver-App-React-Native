@@ -10,7 +10,7 @@
 
 // SINCE WE ARE USING REACT NATIVE WE ARE GOING TO BE USING THE REACT CONTEXT WE ARE GOING TO HAVE A SERVICE FILE THAT'S GOING TO OPERATE AS AN INTERMEDIATE BETWEEN OUR APP AND THE EXTERNAL SERVICE.
 // WE ARE GOING TO MOCK THE EXTERNAL SERVICE WE AREN'T GOING TO MAKE IT AS IF THE EXTERNAL SERVICE IS REAL. AND TO DO THAT WE NEED TO BUILD OUT THIS SERVICE ORIENTED ARCHITECTURE SERVICE LAYER. AND FOR EVERY SUBSEQUEST FEATURE WE WILL BE USING SOMETHING SIMILAR RELATIVELY SIMILAR ALTHOUGH WE MIGHT CHANGED THINGS A BIT BASED ON THE SITUTATION.
-import { mocks } from "./mock";
+import { mocks, mockImages } from "./mock";
 import  camelize  from "camelize";
 
 export const restaurantsRequest = (location = "37.7749295,-122.4194155") => {
@@ -30,6 +30,11 @@ export const restaurantsRequest = (location = "37.7749295,-122.4194155") => {
 
 export const restaurantsTransform = ({results = [] }) => {
     const mappedResults = results.map((restaurant) => {
+        restaurant.photos = restaurant.photos.map((p) => {
+            return mockImages[Math.ceil(Math.random() * (mockImages.length - 1))];
+          });
+        // The above code is helping us take photos from the mock data of the restaurants and display in the app.
+        // I have used Math.random so we can get images display randomly to different restaurants.
         return {
            ...restaurant,
            isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,
@@ -43,6 +48,8 @@ return camelize(mappedResults);
 // map is a function that will iterate over every individual restaurant and will return us restaurants in the mock data.
 // We have create isOpenNOw and isClosedTemporarily above as they are not mentioned in the mock data or we dont' know how mock data appears so we have created a property to make sure it works. 
 
+// THIS FILE IS CREATING AN END TO END FLOW SET UP TO GET THE INFORMATION FROM THE JSON FILES RENDERING ON THE SCREEN,
+// AND DYNAMICALLY RENDERING WE CAN SEE HOW POWERFUL THE ENTIRE SETUP WE WENT THROUGH.
 
 
 

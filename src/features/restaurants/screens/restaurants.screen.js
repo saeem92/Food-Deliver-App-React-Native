@@ -1,7 +1,7 @@
 // We have created this restaurants screen component to show main display screen of our app consists of all the restaurants names and everything
 // This component show us our restaurant app screen UI by importing it from restaurant info component it has all the components thats helping us to build our restaurant screen.
 // This component is responsible for displaying our app on the screen.
-import {  FlatList } from "react-native";
+import {  FlatList, View } from "react-native";
 import { Searchbar } from "react-native-paper";
 import React,{ useContext } from "react";
 import styled from "styled-components/native";
@@ -10,8 +10,19 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { SafeArea } from "../../../components/safe-area.component";
+import { ActivityIndicator, Colors } from "react-native-paper";
 
 // NOTE: We do not have to stylesheet when we style our components using styled-components.
+
+const Loading = styled(ActivityIndicator)`
+   margin-left: -25px;
+ `;
+ const LoadingContainer = styled.View`
+   position: absolute;
+   top: 50%;
+   left: 50%;
+ `;
+// The above component is a styled component for activity indicator to display before our API gets load.
 
 const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[3]};
@@ -29,28 +40,35 @@ const RestaurantList = styled(FlatList).attrs({
 // NOTE: We do not have to stylesheet when we style our components using styled-components.
 
 export const RestaurantsScreen = () => {
-  const restaurantContext = useContext(RestaurantsContext);
+  const {isLoading, error, restaurants} = useContext(RestaurantsContext);
   // In the context we are going to do our service, call and store the restaurants that we get back and have that pass down and eventually we will be able to load up,
   // All of Sanfrancisco's data and you will see all of these restaurants change
-  console.log(restaurantContext);
   return(
   <SafeArea>
     {/* Safeareaview is used to make sure UI is according to iOS and do not overlap with the statusbar in iOS we are using */}
+    {isLoading && (
+         <LoadingContainer>
+           <Loading size={50} animating={true} color={Colors.blue300} />
+         </LoadingContainer>
+       )}
+       {/* The above code is gonna display activity indicator just before our API loads.*/}
     <SearchContainer>
       {/* The searchcontainer is a view we have created where our searchbar lies we have created a styled-component of this view component above and named it search container. */}
       <Searchbar />
       {/* The search bar is imported from react native paper and is helping us to add a searchbox in our app. */}
     </SearchContainer>
     <RestaurantList
-      data= {restaurantContext.restaurants}
-      // IN the above data= {restaurantContext.restaurants} is using the array of the restaurant context right here. from restaurants.context.js  */
-      renderItem={() => 
-      <>
+      data= {restaurants}
+      // IN the above data= {restaurants} is using the property from restaurantinfocardcomponent  */
+      renderItem={({item}) => {
+   console.log(item);
+      return (
       <Spacer position="bottom" size="large">
-      <RestaurantInfo /> 
+      <RestaurantInfo restaurant={item} /> 
       </Spacer>
-      {/* Spacer is placed here between restaurantinfo so that cards dont stick to each other when moving from top to bottom in flatlist.  */}
-      </>}
+      );
+      }}
+      // Spacer is placed here between restaurantinfo so that cards dont stick to each other when moving from top to bottom in flatlist.
       keyExtractor={(item) => item.name}
       
     />
