@@ -9,6 +9,7 @@ import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme/";
 import { Text } from "react-native";
 
+import {LocationContextProvider} from "./src/services/location/location.context";
 import {useFonts as useOswald, Oswald_400Regular,} from '@expo-google-fonts/oswald';
 // The above and below code is importing google fonts that we are using in our app.
 import { useFonts as useLato, Lato_400Regular,} from '@expo-google-fonts/lato';
@@ -79,6 +80,7 @@ if(!oswaldLoaded || !latoLoaded){
     <ThemeProvider theme={theme}> 
     {/* Here we are wrapping our Restaurant Screen with a theme provider
     theme={theme} is basically helping us to utilise theme in our app.*/}
+    <LocationContextProvider>
     <RestaurantsContextProvider>
     {/* We are putting the restaurantContextProvider here to give all access of mock data of restaurants here to diplay them.*/}
       <NavigationContainer>
@@ -102,6 +104,8 @@ if(!oswaldLoaded || !latoLoaded){
       Tab.screen is used to actuallu display the things in our app and bottom navigation RestaurantScreen is used to display all of our restaurantsscnreen.
  */}
  </RestaurantsContextProvider>
+ </LocationContextProvider> 
+ {/* LocationContextProvider is helping us with our search context*/}
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
