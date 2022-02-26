@@ -1,8 +1,10 @@
-import React, { useState, createContext, useEffect, useMemo } from "react";
+import React, { useState, useContext, createContext, useEffect, useMemo } from "react";
 import { Children } from "react/cjs/react.production.min";
 // In the context we are going to do our service, call and store the restaurants that we get back and have that pass down and eventually we will be able to load up,
 // All of Sanfrancisco's data and you will see all of these restaurants change
 import { restaurantsRequest, restaurantsTransform } from "./restaurants.services";
+import { LocationContext } from "../location/location.context";
+
 
 export const RestaurantsContext = createContext();
 
@@ -13,11 +15,13 @@ export const RestaurantsContextProvider = ({ children }) => {
     const [restaurants, setRestaurants] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const { location } = useContext(LocationContext);
 
-    const retrieveRestaurants = () => {
+    const retrieveRestaurants = (loc) => {
         setIsLoading(true);
+        setRestaurants([]);
         setTimeout(() => {
-            restaurantsRequest()
+            restaurantsRequest(loc)
             .then(restaurantsTransform)
             .then((results) => {
                 setIsLoading(false);
@@ -31,8 +35,12 @@ export const RestaurantsContextProvider = ({ children }) => {
         // The above function is helping us create a loading time so that our mock API can act like a real API and will load after 2 seconds
     };
     useEffect(() => {
-       retrieveRestaurants();
-    }, []);
+        if(location){
+            const locationString = `${location.lat},${location.lng}`
+            retrieveRestaurants(locationString);
+        }
+        
+    }, [location]);
     // useEffect(() this is saying run the useEffect when the component mounts
     // When this component mounts when the restaurant context provider mounts we're going to do some 
     return (

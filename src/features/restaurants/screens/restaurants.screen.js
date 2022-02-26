@@ -2,7 +2,7 @@
 // This component show us our restaurant app screen UI by importing it from restaurant info component it has all the components thats helping us to build our restaurant screen.
 // This component is responsible for displaying our app on the screen.
 import { FlatList, View } from "react-native";
-import { Searchbar } from "react-native-paper";
+import { Search } from "../components/search.component";
 import React, { useContext } from "react";
 import styled from "styled-components/native";
 import { RestaurantInfo } from "../components/ restaurant-info-card.component";
@@ -25,13 +25,6 @@ const LoadingContainer = styled.View`
 `;
 // The above component is a styled component for activity indicator to display before our API gets load.
 
-const SearchContainer = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-   {
-    /* In the above code we are using props to set padding from infrastructure folder and we are doing theming here. */
-  }
-`;
-// IN the above SerachContainer we have created a const component SearchContainer which is a view that holds our searchbar and we have give it some padding to give it some space.
 // NOTE: We do not have to stylesheet when we style our components using styled-components.
 
 const RestaurantList = styled(FlatList).attrs({
@@ -55,11 +48,7 @@ export const RestaurantsScreen = () => {
         </LoadingContainer>
       )}
       {/* The above code is gonna display activity indicator just before our API loads.*/}
-      <SearchContainer>
-        {/* The searchcontainer is a view we have created where our searchbar lies we have created a styled-component of this view component above and named it search container. */}
-        <Searchbar />
-        {/* The search bar is imported from react native paper and is helping us to add a searchbox in our app. */}
-      </SearchContainer>
+      <Search />
       <RestaurantList
         data={restaurants}
         // IN the above data= {restaurants} is using the property from restaurantinfocardcomponent  */

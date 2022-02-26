@@ -38,6 +38,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true, // All of this information is going to map to information that we are going to be able to get back from our google API once we integrate that later.
+    placeId
     // We are trying to determine the shape of the object we are trying to get
   } = restaurant; // This is de structuring Here our restaurant is an object that contains properties that we are taking properties off of restaurant restaurant is the object that contains properties. this is the object that we have mentioned above in export const restaurantInfo
 
@@ -66,8 +67,12 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     it contains rating and it contains sectionend which is a special type of component
     To sumup this is acting as a view that has some style which is helping us to put our opennow svg at the corner of the card component.*/}
           <Rating>
-            {ratingArray.map(() => (
-              <SvgXml xml={star} width={20} height={20} />
+            {ratingArray.map((_, i) => (
+              <SvgXml 
+              key={`star-${placeId}-${i}`} 
+              xml={star} 
+              width={20} 
+              height={20} />
             ))}
             {/* In the above code SvgXml is helping us to use star.js which is a svg file to use it in our app.
     xmo={star} we are using it from star.js file which we have imported above in this file

@@ -15,6 +15,10 @@ export const LocationContextProvider = ({ children }) => { // This method is goi
     const onSearch = (searchKeyword) => { // WE have mentioned searchKeyword here to make sure when we trigger onsearch a keyword will be coming in
         setIsLoading(true)
         setKeyword(searchKeyword); // any time we trigger the searchfunction its going to bring us in a keyword.
+        if(!searchKeyword.length){
+            // don't do anything
+            return;
+        }
         locationRequest(searchKeyword.toLowerCase())
         .then(locationTransform)
         .then(result => {
