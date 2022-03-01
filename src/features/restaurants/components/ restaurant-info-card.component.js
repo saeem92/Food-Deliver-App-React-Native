@@ -10,6 +10,7 @@ import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Text } from "../../../components/typography/text.component";
+
 // The above import is from text.component.js file where we have created our typography component.
 
 import {
