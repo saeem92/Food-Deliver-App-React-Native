@@ -8,6 +8,7 @@ import {
   ErrorContainer,
   Title,
 } from "../components/account.styles";
+import { ActivityIndicator, Colors } from "react-native-paper";
 import { colors } from "../../../infrastructure/theme/colors";
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -58,16 +59,16 @@ export const RegisterScreen = ({ navigation }) => {
           )}
           <Spacer size="large">
             {!isLoading ? (
-              <AuthButton
-                icon="email"
-                mode="contained"
-                onPress={() => onRegister(email, password, repeatedPassword)}
-              >
-                Register
-              </AuthButton>
-            ) : (
-              <ActivityIndicator animating={true} color={Colors.blue300} />
-            )}
+                <AuthButton
+               icon="email"
+               mode="contained"
+               onPress={() => onRegister(email, password, repeatedPassword)}
+             >
+               Register
+             </AuthButton>
+           ) : (
+             <ActivityIndicator animating={true} color={Colors.blue300} />
+           )}
           </Spacer>
         </AccountContainer>
         <Spacer size="large">

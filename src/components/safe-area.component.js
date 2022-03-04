@@ -6,6 +6,7 @@ import styled from "styled-components/native";
 
 export const SafeArea = styled(SafeAreaView)`
   flex: 1;
+  background-color: ${(props) => props.theme.colors.bg.primary};
   {/* ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`}; important: UNDO THIS COMMENT IF APP BREAKS ON ANDROID.*/ }
    {
     /* This above margin-top: ${StatusBar.currentHeight}px; is causing an error is iOS so we will fix it */

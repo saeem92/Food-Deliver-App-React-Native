@@ -7,17 +7,17 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme/";
-import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { LocationContextProvider } from "./src/services/location/location.context";
+
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -25,7 +25,7 @@ import {
 // The above and below code is importing google fonts that we are using in our app.
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { Navigation } from "./src/infrastructure/navigation";
-import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGJm4y0Ph2P4RQBiaryruzwdvs6lJd0yc",
@@ -44,20 +44,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      signInWithEmailAndPassword(auth, "saeem@meal.io", "03091999")
-        .then((user) => {
-          console.log(user);
-          setIsAuthenticated(true);
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-    }, 1000);
-  }, []);
 
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -74,7 +60,6 @@ export default function App() {
   if (!oswaldLoaded || !latoLoaded) {
     return null; // if font is not loading by anychance default font will be applied in the app.
   }
-  if (!isAuthenticated) return null;
 
   return (
     <>
@@ -83,9 +68,7 @@ export default function App() {
         {/* Here we are wrapping our Restaurant Screen with a theme provider
     theme={theme} is basically helping us to utilise theme in our app.*/}
     <AuthenticationContextProvider>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
+        
               {/* We are putting the restaurantContextProvider here to give all access of mock data of restaurants here to diplay them.*/}
               <Navigation />
               {/* The above component is created to create bottom navigation in our screen and to also specific component inside our app.
@@ -93,10 +76,6 @@ export default function App() {
       Tab navigation is Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header basically it is helping us to create botton navigation).
       Tab.screen is used to actuallu display the things in our app and bottom navigation RestaurantScreen is used to display all of our restaurantsscnreen.
  */}
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-          {/* LocationContextProvider is helping us with our search context*/}
-        </FavouritesContextProvider>
         </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
