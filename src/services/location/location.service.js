@@ -17,5 +17,5 @@ export const locationTransform = (result) => {
       const {geometry = {} } = formattedResponse.results[0];
       // I have use results[0]; zero is because our value is available in location.mock in an array and we are getting it from the first element of the array so hence its zero
       const {lat, lng} = geometry.location;
-      return {lat, lng};
+      return { lat, lng, viewport: geometry.viewport };
     };
