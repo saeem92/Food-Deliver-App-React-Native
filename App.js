@@ -2,6 +2,10 @@ import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 {
   /* Above we have renamed status bar as expostatusbar this is know as rename action in an import*/
 }
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components/native";
@@ -31,6 +35,10 @@ const firebaseConfig = {
   messagingSenderId: "262394653354",
   appId: "1:262394653354:web:bed6660becf06494f23ed3",
 };
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
