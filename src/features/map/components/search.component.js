@@ -12,7 +12,7 @@ import React, { useContext, useState, useEffect } from "react";
    width: 100%;
  `;
 
- export const Search = () => {
+ export const Search = ({ isFavouritesToggled, onFavouritesToggle }) => {
    const { keyword, search } = useContext(LocationContext);
    const [searchKeyword, setSearchKeyword] = useState(keyword);
    useEffect(() => {
@@ -21,8 +21,9 @@ import React, { useContext, useState, useEffect } from "react";
    return (
      <SearchContainer>
        <Searchbar
+        icon={isFavouritesToggled ? "heart" : "heart-outline"}
+         onIconPress={onFavouritesToggle}
          placeholder="Search for a location"
-         icon="map"
          value={searchKeyword}
          onSubmitEditing={() => {
            search(searchKeyword);

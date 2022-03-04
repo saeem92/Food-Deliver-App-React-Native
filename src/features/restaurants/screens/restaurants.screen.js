@@ -3,11 +3,13 @@
 // This component is responsible for displaying our app on the screen.
 import { FlatList, Pressable, TouchableOpacity } from "react-native";
 import { Search } from "../components/search.component";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components/native";
 import { RestaurantInfoCard } from "../components/ restaurant-info-card.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
+import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { SafeArea } from "../../../components/safe-area.component";
 import { ActivityIndicator, Colors } from "react-native-paper";
@@ -37,6 +39,8 @@ const RestaurantList = styled(FlatList).attrs({
 
 export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, restaurants } = useContext(RestaurantsContext);
+  const { favourites } = useContext(FavouritesContext);
+  const [isToggled, setIsToggled] = useState(false);
   // In the context we are going to do our service, call and store the restaurants that we get back and have that pass down and eventually we will be able to load up,
   // All of Sanfrancisco's data and you will see all of these restaurants change
 
@@ -49,7 +53,13 @@ export const RestaurantsScreen = ({ navigation }) => {
         </LoadingContainer>
       )}
       {/* The above code is gonna display activity indicator just before our API loads.*/}
-      <Search />
+      <Search
+         isFavouritesToggled={isToggled}
+         onFavouritesToggle={() => setIsToggled(!isToggled)}
+       />
+       {isToggled && (
+         <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />
+       )}
       <RestaurantList
         data={restaurants}
         // IN the above data= {restaurants} is using the property from restaurantinfocardcomponent  */

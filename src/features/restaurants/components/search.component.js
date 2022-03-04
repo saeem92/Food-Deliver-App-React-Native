@@ -13,7 +13,7 @@ const SearchContainer = styled.View`
   }
 `;
 // IN the above SerachContainer we have created a const component SearchContainer which is a view that holds our searchbar and we have give it some padding to give it some space.
-  export const Search = () => {
+  export const Search = ({ isFavouritesToggled, onFavouritesToggle }) => {
     const { keyword, search } = useContext(LocationContext);
     const [searchKeyword, setSearchKeyword] = useState(keyword);
     useEffect(() => {
@@ -24,6 +24,8 @@ const SearchContainer = styled.View`
       <SearchContainer>
       {/* The searchcontainer is a view we have created where our searchbar lies we have created a styled-component of this view component above and named it search container. */}
         <Searchbar
+       icon={isFavouritesToggled ? "heart" : "heart-outline"}
+         onIconPress={onFavouritesToggle}
           placeholder="Search for a location"
           value={searchKeyword}
           // onSubmitEditing is a function that is going to allow the program to trigger the search.

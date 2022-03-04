@@ -7,10 +7,11 @@ import React from "react";
 import { SvgXml } from "react-native-svg";
 // In the above code we are importing svgXml to use svg in our app.
 import star from "../../../../assets/star";
+import { View } from "react-native";
 import open from "../../../../assets/open";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Text } from "../../../components/typography/text.component";
-
+import { Favourite } from "../../../components/favourites/favourite.component";
 // The above import is from text.component.js file where we have created our typography component.
 
 import {
@@ -53,7 +54,11 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
       {/* Here we are using our card component which we have imported from react native paper
         Card component has an elevation of 5 elevations give some shadow area to our card component and make it visible
         styles.card is the styles we have created in our stylesheet */}
-      <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+        <View>
+         <Favourite restaurant={restaurant}/>
+         <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+       </View>
+      
       {/* Card cover is mainly used to add Image in the card Here key is the restaurant name which will be display on the bottom. Above we have created card cover which is an image added to the card component on the top of it its the top side of our card component which is the large one 
             we can add image in this cover to display it we have give it a source which will display our image in the card component and we gave it a styles.cover 
             styles.cover has padding of 20 we can give more padding depending on how much space you need.
