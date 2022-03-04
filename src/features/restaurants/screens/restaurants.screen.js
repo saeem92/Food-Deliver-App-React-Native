@@ -1,11 +1,11 @@
 // We have created this restaurants screen component to show main display screen of our app consists of all the restaurants names and everything
 // This component show us our restaurant app screen UI by importing it from restaurant info component it has all the components thats helping us to build our restaurant screen.
 // This component is responsible for displaying our app on the screen.
-import { FlatList, View } from "react-native";
+import { FlatList, Pressable, TouchableOpacity } from "react-native";
 import { Search } from "../components/search.component";
 import React, { useContext } from "react";
 import styled from "styled-components/native";
-import { RestaurantInfo } from "../components/ restaurant-info-card.component";
+import { RestaurantInfoCard } from "../components/ restaurant-info-card.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
@@ -35,10 +35,11 @@ const RestaurantList = styled(FlatList).attrs({
 
 // NOTE: We do not have to stylesheet when we style our components using styled-components.
 
-export const RestaurantsScreen = () => {
-  const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+export const RestaurantsScreen = ({ navigation }) => {
+  const { isLoading, restaurants } = useContext(RestaurantsContext);
   // In the context we are going to do our service, call and store the restaurants that we get back and have that pass down and eventually we will be able to load up,
   // All of Sanfrancisco's data and you will see all of these restaurants change
+
   return (
     <SafeArea>
       {/* Safeareaview is used to make sure UI is according to iOS and do not overlap with the statusbar in iOS we are using */}
@@ -53,11 +54,21 @@ export const RestaurantsScreen = () => {
         data={restaurants}
         // IN the above data= {restaurants} is using the property from restaurantinfocardcomponent  */
         renderItem={({ item }) => {
-          console.log(item);
+          
           return (
+            <TouchableOpacity
+               onPress={() =>
+                 navigation.navigate("RestaurantDetail", {
+                   restaurant: item,
+                 })
+               }
+             >
+             {/* In the above code we opened up an object and said the restaurant was equal to item because item is our restaurant 
+             So we are passing restaurant en route to restaurantdetail as we go over there */}
             <Spacer position="bottom" size="large">
-              <RestaurantInfo restaurant={item} />
+              <RestaurantInfoCard restaurant={item} />
             </Spacer>
+            </TouchableOpacity>
           );
         }}
         // Spacer is placed here between restaurantinfo so that cards dont stick to each other when moving from top to bottom in flatlist.

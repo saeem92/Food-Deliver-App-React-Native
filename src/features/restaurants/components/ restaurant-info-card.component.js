@@ -26,7 +26,7 @@ import {
 // The above imports are helping us to style our restaurantcardcomponent and all of the styling is built with styled-components present in restaurant-info-card.styles.js
 // All these imports are styled-components present inside restaurant-info-card.styles.js
 
-export const RestaurantInfo = ({ restaurant = {} }) => {
+export const RestaurantInfoCard = ({ restaurant = {} }) => {
   // Here our RestaurantInfo will take an object {restaurant}. We have to set restaurant to be an empty object else its going to be UNDEFINED and if its undefined our code will break.
   // Below code is building some mock information for us to set the scene and start building out our card component.
   const {

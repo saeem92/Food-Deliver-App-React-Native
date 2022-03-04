@@ -30,7 +30,7 @@ export const LocationContextProvider = ({ children }) => { // This method is goi
     }).catch(error => {
         setIsLoading(false);
         setError(error);
-    })
+    });
     }, [keyword]);
 
     return (
@@ -41,10 +41,9 @@ export const LocationContextProvider = ({ children }) => { // This method is goi
             location,
             search: onSearch, // this is the search function that is going to trigger the search for a location
             keyword,
-        }}
-        
+        }}  
         >
             {children}
         </LocationContext.Provider>
-    )
-}
+    );
+};
