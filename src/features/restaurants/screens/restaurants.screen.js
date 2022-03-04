@@ -3,12 +3,12 @@
 // This component is responsible for displaying our app on the screen.
 import { FlatList, Pressable, TouchableOpacity } from "react-native";
 import { Search } from "../components/search.component";
+import { FadeInView } from "../components/animation/fade.animation";
 import React, { useContext, useState } from "react";
 import styled from "styled-components/native";
 import { RestaurantInfoCard } from "../components/ restaurant-info-card.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
-
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { SafeArea } from "../../../components/safe-area.component";
@@ -58,7 +58,10 @@ export const RestaurantsScreen = ({ navigation }) => {
          onFavouritesToggle={() => setIsToggled(!isToggled)}
        />
        {isToggled && (
-         <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />
+        <FavouritesBar
+           favourites={favourites}
+           onNavigate={navigation.navigate}
+         />
        )}
       <RestaurantList
         data={restaurants}
@@ -76,7 +79,9 @@ export const RestaurantsScreen = ({ navigation }) => {
              {/* In the above code we opened up an object and said the restaurant was equal to item because item is our restaurant 
              So we are passing restaurant en route to restaurantdetail as we go over there */}
             <Spacer position="bottom" size="large">
-              <RestaurantInfoCard restaurant={item} />
+            <FadeInView>
+                   <RestaurantInfoCard restaurant={item} />
+                 </FadeInView>
             </Spacer>
             </TouchableOpacity>
           );
