@@ -21,7 +21,7 @@ export const LoginScreen = ({ navigation }) => {
     return (
       <AccountBackground>
         <AccountCover />
-        <Title>Food Delivery App</Title>
+        <Title>Foodie bay</Title>
         <AccountContainer>
           <AuthInput
             label="E-mail"
