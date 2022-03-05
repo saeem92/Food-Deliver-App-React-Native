@@ -22,7 +22,7 @@ export const RegisterScreen = ({ navigation }) => {
     return (
       <AccountBackground>
         <AccountCover />
-        <Title>Meals To Go</Title>
+        <Title>Food Delivery App</Title>
         <AccountContainer>
           <AuthInput
             label="E-mail"
