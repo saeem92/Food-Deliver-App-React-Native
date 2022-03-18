@@ -2,7 +2,7 @@
 Foodie Bay is a Food Delivery App Built with react native and javascript for both iOS and Android Devices.
 <p align="center">
  <img src="https://user-images.githubusercontent.com/93969890/156872939-41b7b28f-c383-4c94-87a7-287781e462c7.png" width="27.3%">
- <img src="https://user-images.githubusercontent.com/93969890/158262739-4d1bbd10-fb68-4d84-876b-4d3ab4fae212.mov" width="30%">
+ <video src="https://user-images.githubusercontent.com/93969890/158262739-4d1bbd10-fb68-4d84-876b-4d3ab4fae212.mov" width="30%">
 </p>
 
 
